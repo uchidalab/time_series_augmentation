@@ -88,7 +88,7 @@ if __name__ == "__main__":
     x_train, y_train, x_test, y_test = get_datasets(args)
     
     nb_timesteps = int(x_train.shape[1] / nb_dims)
-    input_shape = (nb_timesteps , nb_dims)
+    input_shape = (nb_timesteps, nb_dims)
         
     # Process data
     x_test = x_test.reshape((-1, input_shape[0], input_shape[1])) 
