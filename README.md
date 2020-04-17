@@ -21,7 +21,7 @@ pip install keras==2.2.4 numpy==1.14.5 matplotlib==2.2.2 scikit-image==0.15.0 tq
 ```
 cd docker
 sudo docker build -t tsa .
-docker run --runtime nvidia -rm -it -p 127.0.0.1:8888:8888 -v `pwd`:/work -w /work sglrp jupyter notebook --allow-root
+docker run --runtime nvidia -rm -it -p 127.0.0.1:8888:8888 -v `pwd`:/work -w /work tsa jupyter notebook --allow-root
 ```
 
 Newer docker installs might use ```--gpus all``` instead of ```--runtime nvidia```  
