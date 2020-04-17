@@ -134,9 +134,9 @@ def nb_classes(dataset):
         return 60 # 512
     if dataset == "SmallKitchenAppliances":
         return 3 #720
-    if dataset == "SonyAIBORobotSurfaceII":
+    if dataset == "SonyAIBORobotSurface2":
         return 2 #65
-    if dataset == "SonyAIBORobotSurface":
+    if dataset == "SonyAIBORobotSurface1":
         return 2 #70
     if dataset == "StarLightCurves":
         return 3 #1024
@@ -398,9 +398,9 @@ def class_modifier_add(dataset):
         return -1 # 512
     if dataset == "SmallKitchenAppliances":
         return -1 #720
-    if dataset == "SonyAIBORobotSurfaceII":
+    if dataset == "SonyAIBORobotSurface2":
         return -1 #65
-    if dataset == "SonyAIBORobotSurface":
+    if dataset == "SonyAIBORobotSurface1":
         return -1 #70
     if dataset == "StarLightCurves":
         return -1 #1024
