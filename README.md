@@ -2,8 +2,6 @@
 
 This is a Keras implementation of the paper, Brian Kenji Iwana and Seiichi Uchida, *Time Series Data Augmentation for Neural Networks by Time Warping with a Discriminative Teacher*.
 
-```from utils.augmentation import XXXX``
-
 ## News
 
 - 2020/04/16: Repository Created.
@@ -33,6 +31,9 @@ Newer docker installs might use ```--gpus all``` instead of ```--runtime nvidia`
 ### Augmentation Methods
 
 All of the augmentation methods expect a numpy array ```x``` of size ```(batch, time_steps, channel)``` where ```batch``` is the size of the dataset or batch, ```time_steps``` is the number of time steps, and ```channel``` is the number of dimensions. Even if 1D time series are used, ```channel``` should still be 1. 
+
+
+```from utils.augmentation import XXXX```
 
 #### Jittering
 Adding jittering, or noise, to the time series.
