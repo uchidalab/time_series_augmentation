@@ -16,6 +16,17 @@ def rotation(x):
     np.random.shuffle(rotate_axis)    
     return flip[:,np.newaxis,:] * x[:,:,rotate_axis]
 
+def rotation2d(x, sigma=0.2):
+    thetas = np.random.normal(loc=0, scale=sigma, size=(x.shape[0]))
+    c = np.cos(thetas)
+    s = np.sin(thetas)
+    
+    ret = np.zeros_like(x)
+    for i, pat in enumerate(x):
+        rot = np.array(((c[i], -s[i]), (s[i], c[i])))
+        ret[i] = np.dot(pat, rot)
+    return ret
+
 def permutation(x, max_segments=5, seg_mode="equal"):
     orig_steps = np.arange(x.shape[1])
     
