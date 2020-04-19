@@ -1,21 +1,23 @@
 # Augmentation Methods
 
-All of the augmentation methods expect a numpy array ```x``` of size ```(batch, time_steps, channel)``` where ```batch``` is the size of the dataset or batch, ```time_steps``` is the number of time steps, and ```channel``` is the number of dimensions. Even if 1D time series are used, ```channel``` should still be 1. 
+All of the augmentation methods expect a numpy array `x` of size `(batch, time_steps, channel)` where `batch` is the size of the dataset or batch, `time_steps` is the number of time steps, and `channel` is the number of dimensions. Even if 1D time series are used, `channel` should still be 1. 
 
 
-```from utils.augmentation import XXXX```
+```python
+import utils.augmentation as aug
+```
 
 ## Jittering
 Adding jittering, or noise, to the time series.
 
-```
-jitter(x, sigma=0.03)
+```python
+aug.jitter(x, sigma=0.03)
 ```
 
 ##### Arguments
 **x** : *3D numpy array*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format ```(batch, time_steps, channel)```.
+&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format `(batch, time_steps, channel)`.
 
 **sigma** : *float*
 
@@ -24,19 +26,19 @@ jitter(x, sigma=0.03)
 ##### Returns
 *3D numpy array*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of generated data of equal size of the input ```x```.
+&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of generated data of equal size of the input `x`.
 
 ## Scaling
 Scaling each time series by a constant amount.
 
-```
-scaling(x, sigma=0.1)
+```python
+aug.scaling(x, sigma=0.1)
 ```
 
 ##### Arguments
 **x** : *3D numpy array*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format ```(batch, time_steps, channel)```.
+&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format `(batch, time_steps, channel)`.
 
 **sigma** : *float*
 
@@ -45,36 +47,36 @@ scaling(x, sigma=0.1)
 ##### Returns
 *3D numpy array*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of generated data of equal size of the input ```x```.
+&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of generated data of equal size of the input `x`.
 
 ## Flipping/Rotation
 For 1D time series, randomly flipping. For multivariate time series, flipping as well as axis shuffling.
 
-```
-rotation(x)
+```python
+aug.rotation(x)
 ```
 
 ##### Arguments
 **x** : *3D numpy array*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format ```(batch, time_steps, channel)```.
+&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format `(batch, time_steps, channel)`.
 
 ##### Returns
 *3D numpy array*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of generated data of equal size of the input ```x```.
+&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of generated data of equal size of the input `x`.
 
 ## 2D Rotation
 A special case of 2D rotation where the pattern is spacially rotated around the center.
 
-```
-rotation2d(x, sigma=0.2)
+```python
+aug.rotation2d(x, sigma=0.2)
 ```
 
 ##### Arguments
 **x** : *3D numpy array*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format ```(batch, time_steps, channel)```.
+&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format `(batch, time_steps, channel)`.
 
 **sigma** : *float*
 
@@ -83,20 +85,20 @@ rotation2d(x, sigma=0.2)
 ##### Returns
 *3D numpy array*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of generated data of equal size of the input ```x```.
+&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of generated data of equal size of the input `x`.
 
 ## Permutation
 
-Random permutation of segments. A random number of segments is used, up to ```max_segments```.
+Random permutation of segments. A random number of segments is used, up to `max_segments`.
 
-```
-permutation(x, max_segments=5, seg_mode="equal")
+```python
+aug.permutation(x, max_segments=5, seg_mode="equal")
 ```
 
 ##### Arguments
 **x** : *3D numpy array*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format ```(batch, time_steps, channel)```.
+&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format `(batch, time_steps, channel)`.
 
 **max_segments** : *int*
 
@@ -104,28 +106,28 @@ permutation(x, max_segments=5, seg_mode="equal")
 
 **seg_mode** : *str*
 
-&nbsp;&nbsp;&nbsp;&nbsp; ```equal``` uses equal sized segments and ```random``` uses randomly sized segments.
+&nbsp;&nbsp;&nbsp;&nbsp; `equal` uses equal sized segments and `random` uses randomly sized segments.
 
 ##### Returns
 *3D numpy array*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of generated data of equal size of the input ```x```.
+&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of generated data of equal size of the input `x`.
 
 ## Magnitude Warping
 
 The magnitude of each time series is multiplied by a curve created by cubicspline with a set number of knots at random magnitudes.
 
-```
-magnitude_warp(x, sigma=0.2, knot=4)
+```python
+aug.magnitude_warp(x, sigma=0.2, knot=4)
 ```
 
 Based on:
-T. T. Um et al, "Data augmentation of wearable sensor data for parkinson’s disease monitoring using convolutional neural networks," in ACM ICMI, pp. 216-220, 2017.
+T. T. Um et al, "Data augmentation of wearable sensor data for parkinsonâ€™s disease monitoring using convolutional neural networks," in ACM ICMI, pp. 216-220, 2017.
 
 ##### Arguments
 **x** : *3D numpy array*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format ```(batch, time_steps, channel)```.
+&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format `(batch, time_steps, channel)`.
 
 **sigma** : *float*
 
@@ -138,23 +140,23 @@ T. T. Um et al, "Data augmentation of wearable sensor data for parkinson’s disea
 ##### Returns
 *3D numpy array*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of generated data of equal size of the input ```x```.
+&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of generated data of equal size of the input `x`.
 
 ## Time Warping
 
 Random smooth time warping. 
 
-```
-time_warp(x, sigma=0.2, knot=4)
+```python
+aug.time_warp(x, sigma=0.2, knot=4)
 ```
 
 Based on:
-T. T. Um et al, "Data augmentation of wearable sensor data for parkinson’s disease monitoring using convolutional neural networks," in ACM ICMI, pp. 216-220, 2017.
+T. T. Um et al, "Data augmentation of wearable sensor data for parkinsonâ€™s disease monitoring using convolutional neural networks," in ACM ICMI, pp. 216-220, 2017.
 
 ##### Arguments
 **x** : *3D numpy array*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format ```(batch, time_steps, channel)```.
+&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format `(batch, time_steps, channel)`.
 
 **sigma** : *float*
 
@@ -167,14 +169,14 @@ T. T. Um et al, "Data augmentation of wearable sensor data for parkinson’s disea
 ##### Returns
 *3D numpy array*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of generated data of equal size of the input ```x```.
+&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of generated data of equal size of the input `x`.
 
 ## Window Slicing
 
-Cropping the time series by the ```reduce_ratio```. 
+Cropping the time series by the `reduce_ratio`. 
 
-```
-window_slice(x, reduce_ratio=0.9)
+```python
+aug.window_slice(x, reduce_ratio=0.9)
 ```
 
 Based on:
@@ -184,7 +186,7 @@ Convolutional Neural Networks," in ECML/PKDD Workshop on Advanced Analytics and 
 ##### Arguments
 **x** : *3D numpy array*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format ```(batch, time_steps, channel)```.
+&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format `(batch, time_steps, channel)`.
 
 **sigma** : *float*
 
@@ -197,14 +199,14 @@ Convolutional Neural Networks," in ECML/PKDD Workshop on Advanced Analytics and 
 ##### Returns
 *3D numpy array*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of generated data of equal size of the input ```x```.
+&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of generated data of equal size of the input `x`.
 
 ## Window Warping
 
-Randomly warps a window by ```scales```.
+Randomly warps a window by `scales`.
 
-```
-window_warp(x, window_ratio=0.1, scales=[0.5, 2.])
+```python
+aug.window_warp(x, window_ratio=0.1, scales=[0.5, 2.])
 ```
 
 Based on:
@@ -214,7 +216,7 @@ Convolutional Neural Networks," in ECML/PKDD Workshop on Advanced Analytics and 
 ##### Arguments
 **x** : *3D numpy array*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format ```(batch, time_steps, channel)```.
+&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format `(batch, time_steps, channel)`.
 
 **window_ratio** : *float*
 
@@ -227,14 +229,14 @@ Convolutional Neural Networks," in ECML/PKDD Workshop on Advanced Analytics and 
 ##### Returns
 *3D numpy array*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of generated data of equal size of the input ```x```.
+&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of generated data of equal size of the input `x`.
 
 ## SuboPtimAl Warped time-series geNEratoR (SPAWNER)
 
 Uses SPAWNER by K. Kamycki et al.
 
-```
-spawner(x, labels, sigma=0.05, verbose=0)
+```python
+aug.spawner(x, labels, sigma=0.05, verbose=0)
 ```
 
 Based on:
@@ -243,7 +245,7 @@ K. Kamycki, T. Kapuscinski, M. Oszust, "Data Augmentation with Suboptimal Warpin
 ##### Arguments
 **x** : *3D numpy array*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format ```(batch, time_steps, channel)```.
+&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format `(batch, time_steps, channel)`.
 
 **labels** : *2D or 3D numpy array*
 
@@ -255,19 +257,19 @@ K. Kamycki, T. Kapuscinski, M. Oszust, "Data Augmentation with Suboptimal Warpin
 
 **verbose** : *int*
 
-&nbsp;&nbsp;&nbsp;&nbsp; ```1``` prints out a DTW matrix. ```0``` shows nothing. 
+&nbsp;&nbsp;&nbsp;&nbsp; `1` prints out a DTW matrix. `0` shows nothing. 
 
 ##### Returns
 *3D numpy array*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of generated data of equal size of the input ```x```.
+&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of generated data of equal size of the input `x`.
 
 ## Weighted Dynamic Time Warping Barycenter Averaging (wDBA)
 
 Uses the Average Selected with Distance (ASD) version of DBA from G. Forestier et al.
 
-```
-wdba(x, labels, batch_size=6, slope_constraint="symmetric", use_window=True)
+```python
+aug.wdba(x, labels, batch_size=6, slope_constraint="symmetric", use_window=True)
 ```
 
 Based on:
@@ -276,7 +278,7 @@ G. Forestier, F. Petitjean, H. A. Dau, G. I. Webb, E. Keogh, "Generating Synthet
 ##### Arguments
 **x** : *3D numpy array*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format ```(batch, time_steps, channel)```.
+&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format `(batch, time_steps, channel)`.
 
 **labels** : *2D or 3D numpy array*
 
@@ -288,11 +290,11 @@ G. Forestier, F. Petitjean, H. A. Dau, G. I. Webb, E. Keogh, "Generating Synthet
 
 **slope_constraint** : *str*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Slope constraint for DTW. ```"symmetric"``` or ```"asymmetric"```. 
+&nbsp;&nbsp;&nbsp;&nbsp; Slope constraint for DTW. `"symmetric"` or `"asymmetric"`. 
 
 **use_window** : *bool*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Use a 10% boundary constraint window for DTW. ```True``` or ```False```. 
+&nbsp;&nbsp;&nbsp;&nbsp; Use a 10% boundary constraint window for DTW. `True` or `False`. 
 
 ##### Returns
 *3D numpy array*
@@ -301,8 +303,8 @@ G. Forestier, F. Petitjean, H. A. Dau, G. I. Webb, E. Keogh, "Generating Synthet
 
 ## Random Guided Warping (RGW)
 
-```
-random_guided_warp(x, labels, slope_constraint="symmetric", use_window=True, dtw_type="normal")
+```python
+aug.random_guided_warp(x, labels, slope_constraint="symmetric", use_window=True, dtw_type="normal")
 ```
 
 Based on:
@@ -311,7 +313,7 @@ B. K. Iwana, S. Uchida, "Time Series Data Augmentation for Neural Networks by Ti
 ##### Arguments
 **x** : *3D numpy array*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format ```(batch, time_steps, channel)```.
+&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format `(batch, time_steps, channel)`.
 
 **labels** : *2D or 3D numpy array*
 
@@ -319,25 +321,25 @@ B. K. Iwana, S. Uchida, "Time Series Data Augmentation for Neural Networks by Ti
 
 **slope_constraint** : *str*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Slope constraint for DTW. ```"symmetric"``` or ```"asymmetric"```. 
+&nbsp;&nbsp;&nbsp;&nbsp; Slope constraint for DTW. `"symmetric"` or `"asymmetric"`. 
 
 **use_window** : *bool*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Use a 10% boundary constraint window for DTW. ```True``` or ```False```. 
+&nbsp;&nbsp;&nbsp;&nbsp; Use a 10% boundary constraint window for DTW. `True` or `False`. 
 
 **dtw_type** : *str*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Use DTW (```normal```) or shapeDTW (```shape```). 
+&nbsp;&nbsp;&nbsp;&nbsp; Use DTW (`normal`) or shapeDTW (`shape`). 
 
 ##### Returns
 *3D numpy array*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of generated data of equal size of the input ```x```.
+&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of generated data of equal size of the input `x`.
 
 ## Discriminative Guided Warping (DGW)
 
-```
-discriminative_guided_warp(x, labels, batch_size=6, slope_constraint="symmetric", use_window=True, dtw_type="normal", use_variable_slice=True)
+```python
+aug.discriminative_guided_warp(x, labels, batch_size=6, slope_constraint="symmetric", use_window=True, dtw_type="normal", use_variable_slice=True)
 ```
 
 Based on:
@@ -346,7 +348,7 @@ B. K. Iwana, S. Uchida, "Time Series Data Augmentation for Neural Networks by Ti
 ##### Arguments
 **x** : *3D numpy array*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format ```(batch, time_steps, channel)```.
+&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of time series in format `(batch, time_steps, channel)`.
 
 **labels** : *2D or 3D numpy array*
 
@@ -354,19 +356,19 @@ B. K. Iwana, S. Uchida, "Time Series Data Augmentation for Neural Networks by Ti
 
 **batch_size** : *int*
 
-&nbsp;&nbsp;&nbsp;&nbsp; How many patterns to search. ```np.ceil(batch_size/2.)``` are used as positive samples and ```np.floor(batch_size/2.)``` are used for negative samples.
+&nbsp;&nbsp;&nbsp;&nbsp; How many patterns to search. `np.ceil(batch_size/2.)` are used as positive samples and `np.floor(batch_size/2.)` are used for negative samples.
 
 **slope_constraint** : *str*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Slope constraint for DTW. ```"symmetric"``` or ```"asymmetric"```. 
+&nbsp;&nbsp;&nbsp;&nbsp; Slope constraint for DTW. `"symmetric"` or `"asymmetric"`. 
 
 **use_window** : *bool*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Use a 10% boundary constraint window for DTW. ```True``` or ```False```. 
+&nbsp;&nbsp;&nbsp;&nbsp; Use a 10% boundary constraint window for DTW. `True` or `False`. 
 
 **dtw_type** : *str*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Use DTW (```normal```) or shapeDTW (```shape```). 
+&nbsp;&nbsp;&nbsp;&nbsp; Use DTW (`normal`) or shapeDTW (`shape`). 
 
 **use_variable_slice** : *bool*
 
@@ -375,4 +377,4 @@ B. K. Iwana, S. Uchida, "Time Series Data Augmentation for Neural Networks by Ti
 ##### Returns
 *3D numpy array*
 
-&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of generated data of equal size of the input ```x```.
+&nbsp;&nbsp;&nbsp;&nbsp; Numpy array of generated data of equal size of the input `x`.
