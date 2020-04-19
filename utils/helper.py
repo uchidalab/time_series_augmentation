@@ -21,20 +21,27 @@ def plot2d(x, y, x2=None, y2=None, x3=None, y3=None, xlim=(-1, 1), ylim=(-1, 1),
 def plot1d(x, x2=None, x3=None, ylim=(-1, 1), save_file=""):
     import matplotlib.pyplot as plt
 
-    plt.figure(figsize=(6, 3))
-    steps = np.arange(x.shape[0])
-    plt.plot(steps, x)
-    if x2 is not None:
-        plt.plot(steps, x2)
-    if x3 is not None:
-        plt.plot(steps, x3)
-    plt.xlim(0, x.shape[0])
-    plt.ylim(ylim)
-    plt.tight_layout()
-    if save_file:
-        plt.savefig(save_file, "")
-    else:
-        plt.show()
+    with plt.style.context('seaborn-paper'):
+        cmap = plt.rcParams['axes.prop_cycle'].by_key()['color']
+        plt.figure(figsize=(6, 3))
+        steps = np.arange(x.shape[0])
+        if x2 is None:
+            plt.plot(steps, x, color=cmap[0], linewidth=2)
+        else:
+            plt.plot(steps, x, color=cmap[0], linewidth=2, ls=":")
+        if x2 is not None:
+            plt.plot(steps, x2, color=cmap[3], linewidth=2)
+        if x3 is not None:
+            plt.plot(steps, x3)
+        plt.xlim(0, x.shape[0])
+        plt.ylim(ylim)
+        plt.yticks([])
+        plt.xticks([])
+        plt.tight_layout()
+        if save_file:
+            plt.savefig(save_file, "")
+        else:
+            plt.show()
     return
 
 

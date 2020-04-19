@@ -1,13 +1,9 @@
+# Only good for UCR Time Series Archive 2018. Will not work for 2015 version.
+
 def nb_dims(dataset):
-    if dataset in ["unipen1a", "unipen1b", "unipen1c"]:
-        return 2
     return 1
 
 def nb_classes(dataset):
-    if dataset == "unipen1a":
-        return 10
-    if dataset in ["unipen1b", "unipen1c"]:
-        return 26
     if dataset == "FiftyWords":
         return 50 #270
     if dataset == "Adiac":
