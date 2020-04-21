@@ -299,9 +299,9 @@ def discriminative_guided_warp(x, labels, batch_size=6, slope_constraint="symmet
         max_warp = np.max(warp_amount)
         if max_warp == 0:
             # unchanged
-            ret = window_slice(ret, reduce_ratio=0.9)
+            ret = window_slice(ret, reduce_ratio=0.95)
         else:
             for i, pat in enumerate(ret):
                 # Variable Sllicing
-                ret[i] = window_slice(pat[np.newaxis,:,:], reduce_ratio=0.9+0.1*warp_amount[i]/max_warp)[0]
+                ret[i] = window_slice(pat[np.newaxis,:,:], reduce_ratio=0.95+0.05*warp_amount[i]/max_warp)[0]
     return ret
