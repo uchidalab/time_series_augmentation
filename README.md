@@ -47,7 +47,7 @@ python3 main.py --gpus=0 --dataset=FiftyWords --preset_files --ucr2018 --normali
 
 ## Citation
 
-B. K. Iwana and S. Uchida, "Time Series Data Augmentation for Neural Networks by Time Warping with a Discriminative Teacher," arXiV, 2020.
+B. K. Iwana and S. Uchida, "Time Series Data Augmentation for Neural Networks by Time Warping with a Discriminative Teacher," arXiv preprint arXiv:2004.08780, 2020.
 
 ```
 @article{iwana2020time,
