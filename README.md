@@ -26,6 +26,10 @@ docker run --runtime nvidia -rm -it -p 127.0.0.1:8888:8888 -v `pwd`:/work -w /wo
 
 Newer docker installs might use ```--gpus all``` instead of ```--runtime nvidia```  
 
+### Dataset
+
+`main.py` was designed to use the UCR Time Series Archive 2018 datasets. To install the datasets, download the .zip file from https://www.cs.ucr.edu/~eamonn/time_series_data_2018/ and extract the contents into the `data` folder.
+
 ## Usage
 
 ### Description of Time Series Augmentation Methods
