@@ -100,9 +100,9 @@ def nb_classes(dataset):
         return 6 #80
     if dataset == "MoteStrain":
         return 2 #84
-    if dataset == "NonInvasiveFatalECGThorax1":
+    if dataset == "NonInvasiveFetalECGThorax1":
         return 42 #750
-    if dataset == "NonInvasiveFatalECGThorax2":
+    if dataset == "NonInvasiveFetalECGThorax2":
         return 42 #750
     if dataset == "OliveOil":
         return 4 #570
@@ -364,9 +364,9 @@ def class_modifier_add(dataset):
         return -3 #80
     if dataset == "MoteStrain":
         return -1 #84
-    if dataset == "NonInvasiveFatalECGThorax1":
+    if dataset == "NonInvasiveFetalECGThorax1":
         return -1 #750
-    if dataset == "NonInvasiveFatalECGThorax2":
+    if dataset == "NonInvasiveFetalECGThorax2":
         return -1 #750
     if dataset == "OliveOil":
         return -1 #570
