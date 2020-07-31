@@ -108,19 +108,19 @@ def augment(x, y, args):
     if args.spawner:
         x = aug.spawner(x, y)
         augmentation_tags += "_spawner"
-    if args.rgwd:
-        x = aug.random_guided_warp(x, y)
-        augmentation_tags += "_rgwd"
-    if args.rgwsd:
-        x = aug.random_guided_warp(x, y, dtw_type="shape")
-        augmentation_tags += "_rgwsd"
+    if args.dtwwarp:
+        x = aug.dtw_warp(x, y)
+        augmentation_tags += "_dtwwarp"
+    if args.shapedtwwarp:
+        x = aug.shape_dtw_warp(x, y)
+        augmentation_tags += "_shapedtwwarp"
     if args.wdba:
         x = aug.wdba(x, y)
         augmentation_tags += "_wdba"
-    if args.dgwd:
-        x = aug.discriminative_guided_warp(x, y)
-        augmentation_tags += "_dgwd"
-    if args.dgwsd:
-        x = aug.discriminative_guided_warp(x, y, dtw_type="shape")
-        augmentation_tags += "_dgwsd"
+    if args.discdtw:
+        x = aug.discriminative_dtw_warp(x, y)
+        augmentation_tags += "_discdtw"
+    if args.discsdtw:
+        x = aug.discriminative_shape_dtw_warp(x, y)
+        augmentation_tags += "_discsdtw"
     return x, augmentation_tags

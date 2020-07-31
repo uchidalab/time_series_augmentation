@@ -1,9 +1,13 @@
-# Only good for UCR Time Series Archive 2018. Will not work for 2015 version.
-
 def nb_dims(dataset):
+    if dataset in ["unipen1a", "unipen1b", "unipen1c"]:
+        return 2
     return 1
 
 def nb_classes(dataset):
+    if dataset == "unipen1a":
+        return 10
+    if dataset in ["unipen1b", "unipen1c"]:
+        return 26
     if dataset == "FiftyWords":
         return 50 #270
     if dataset == "Adiac":
@@ -166,7 +170,7 @@ def nb_classes(dataset):
         return 2 #152
     if dataset == "Wine":
         return 2 #234
-    if dataset == "WordsSynonyms":
+    if dataset == "WordSynonyms":
         return 25 #270
     if dataset == "Worms":
         return 5 #900
@@ -430,7 +434,7 @@ def class_modifier_add(dataset):
         return 1 #152
     if dataset == "Wine":
         return -1 #234
-    if dataset == "WordsSynonyms":
+    if dataset == "WordSynonyms":
         return -1 #270
     if dataset == "Worms":
         return -1 #900

@@ -18,58 +18,57 @@ import utils.datasets as ds
 import utils.helper as hlp
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Runs data augmentation and model.')
+    parser = argparse.ArgumentParser(description='Runs augmentation model.')
     # General settings
     parser.add_argument('--gpus', type=str, default="", help="Sets CUDA_VISIBLE_DEVICES")
-    parser.add_argument('--dataset', type=str, required=True, help='Name of dataset to test (required, ex: ShapeletSim)')
-    parser.add_argument('--model', type=str, default="vgg", help="Choose from preset models")
+    parser.add_argument('--dataset', type=str, required=True, help='Name of dataset to test (required, ex: unipen1a)')
+    parser.add_argument('--model', type=str, default="vgg", help="Set model name")
     parser.add_argument('--train', default=False, action="store_true", help="Train?")
-    parser.add_argument('--save', default=False, action="store_true", help="Save to disk?")
+    parser.add_argument('--save', default=False, action="store_true", help="save to disk?")
     
     # Augmentation
-    parser.add_argument('--augmentation_ratio', type=int, default=0, help="Number of times to multiply the training set through augmentation")
+    parser.add_argument('--augmentation_ratio', type=int, default=0, help="How many times to augment")
     parser.add_argument('--seed', type=int, default=2, help="Randomization seed")
-    parser.add_argument('--jitter', default=False, action="store_true", help="Add Jittering")
-    parser.add_argument('--scaling', default=False, action="store_true", help="Add Scaling")
-    parser.add_argument('--permutation', default=False, action="store_true", help="Add Equal Length Permutation")
-    parser.add_argument('--randompermutation', default=False, action="store_true", help="Add Random Length Permutation")
-    parser.add_argument('--magwarp', default=False, action="store_true", help="Add Magnitude Warping")
-    parser.add_argument('--timewarp', default=False, action="store_true", help="Add Time Warping")
-    parser.add_argument('--windowslice', default=False, action="store_true", help="Add Window Slicing")
-    parser.add_argument('--windowwarp', default=False, action="store_true", help="Add Window Warping")
-    parser.add_argument('--rotation', default=False, action="store_true", help="Add Rotation")
-    parser.add_argument('--spawner', default=False, action="store_true", help="Add SPAWNER")
-    parser.add_argument('--rgwd', default=False, action="store_true", help="Add Random Guided Warping (DTW)")
-    parser.add_argument('--rgwsd', default=False, action="store_true", help="Add Random Guided Warping (shapeDTW)")
-    parser.add_argument('--wdba', default=False, action="store_true", help="Add Weighted DBA")
-    parser.add_argument('--dgwd', default=False, action="store_true", help="Add Discriminative Guided Warping (DTW)")
-    parser.add_argument('--dgwsd', default=False, action="store_true", help="Add Discriminative Guided Warping (shapeDTW)")
+    parser.add_argument('--jitter', default=False, action="store_true", help="Jitter preset augmentation")
+    parser.add_argument('--scaling', default=False, action="store_true", help="Scaling preset augmentation")
+    parser.add_argument('--permutation', default=False, action="store_true", help="Equal Length Permutation preset augmentation")
+    parser.add_argument('--randompermutation', default=False, action="store_true", help="Random Length Permutation preset augmentation")
+    parser.add_argument('--magwarp', default=False, action="store_true", help="Magnitude warp preset augmentation")
+    parser.add_argument('--timewarp', default=False, action="store_true", help="Time warp preset augmentation")
+    parser.add_argument('--windowslice', default=False, action="store_true", help="Window slice preset augmentation")
+    parser.add_argument('--windowwarp', default=False, action="store_true", help="Window warp preset augmentation")
+    parser.add_argument('--rotation', default=False, action="store_true", help="Rotation preset augmentation")
+    parser.add_argument('--spawner', default=False, action="store_true", help="SPAWNER preset augmentation")
+    parser.add_argument('--dtwwarp', default=False, action="store_true", help="DTW warp preset augmentation")
+    parser.add_argument('--shapedtwwarp', default=False, action="store_true", help="Shape DTW warp preset augmentation")
+    parser.add_argument('--wdba', default=False, action="store_true", help="Weighted DBA preset augmentation")
+    parser.add_argument('--discdtw', default=False, action="store_true", help="Discrimitive DTW warp preset augmentation")
+    parser.add_argument('--discsdtw', default=False, action="store_true", help="Discrimitive shapeDTW warp preset augmentation")
     parser.add_argument('--extra_tag', type=str, default="", help="Anything extra")
     
     # File settings
-    parser.add_argument('--preset_files', default=False, action="store_true", help="Use preset file scheme")
+    parser.add_argument('--preset_files', default=False, action="store_true", help="Use preset files")
     parser.add_argument('--ucr', default=False, action="store_true", help="Use UCR 2015")
     parser.add_argument('--ucr2018', default=False, action="store_true", help="Use UCR 2018")
-    parser.add_argument('--data_dir', type=str, default="data", help="Data Directory")
-    parser.add_argument('--test_split', type=int, default=0, help="Test split")
-    parser.add_argument('--weight_dir', type=str, default="weights", help="Weight Save Path")
-    parser.add_argument('--log_dir', type=str, default="logs", help="Log Save Path")
-    parser.add_argument('--output_dir', type=str, default="output", help="Output Save Path")
+    parser.add_argument('--data_dir', type=str, default="data", help="Data dir")
+    parser.add_argument('--train_data_file', type=str, default="", help="Train data file")
+    parser.add_argument('--train_labels_file', type=str, default="", help="Train label file")
+    parser.add_argument('--test_data_file', type=str, default="", help="Test data file")
+    parser.add_argument('--test_labels_file', type=str, default="", help="Test label file")
+    parser.add_argument('--test_split', type=int, default=0, help="test split")
+    parser.add_argument('--weight_dir', type=str, default="weights", help="Weight path")
+    parser.add_argument('--log_dir', type=str, default="logs", help="Log path")
+    parser.add_argument('--output_dir', type=str, default="output", help="Output path")
     parser.add_argument('--normalize_input', default=False, action="store_true", help="Normalize between [-1,1]")
     parser.add_argument('--delimiter', type=str, default=" ", help="Delimiter")
-    # if NOT using --preset_files
-    parser.add_argument('--train_data_file', type=str, default="", help="Train data file if NOT using preset")
-    parser.add_argument('--train_labels_file', type=str, default="", help="Train label file if NOT using preset")
-    parser.add_argument('--test_data_file', type=str, default="", help="Test data file if NOT using preset")
-    parser.add_argument('--test_labels_file', type=str, default="", help="Test label file if NOT using preset")
     
     # Network settings
-    parser.add_argument('--optimizer', type=str, default="sgd", help="Set Optimizers")
+    parser.add_argument('--optimizer', type=str, default="sgd", help="Which optimizer")
     parser.add_argument('--lr', type=float, default=1e-2, help="Learning Rate")
-    parser.add_argument('--validation_split', type=int, default=0, help="Validation Split")
-    parser.add_argument('--iterations', type=int, default=10000, help="Number of Iterations")
-    parser.add_argument('--batch_size', type=int, default=256, help="Batch size")
-    parser.add_argument('--verbose', type=int, default=1, help="Verbose")
+    parser.add_argument('--validation_split', type=int, default=0, help="size of validation set")
+    parser.add_argument('--iterations', type=int, default=10000, help="Number of iterations")
+    parser.add_argument('--batch_size', type=int, default=256, help="batch size")
+    parser.add_argument('--verbose', type=int, default=1, help="verbose")
     
     args = parser.parse_args()
         
@@ -88,7 +87,7 @@ if __name__ == "__main__":
     x_train, y_train, x_test, y_test = get_datasets(args)
     
     nb_timesteps = int(x_train.shape[1] / nb_dims)
-    input_shape = (nb_timesteps, nb_dims)
+    input_shape = (nb_timesteps , nb_dims)
         
     # Process data
     x_test = x_test.reshape((-1, input_shape[0], input_shape[1])) 
@@ -131,6 +130,9 @@ if __name__ == "__main__":
     elif args.optimizer=="nadam":
         from keras.optimizers import Nadam
         optm = Nadam(lr=args.lr)
+    elif args.optimizer=="adadelta":
+        from keras.optimizers import Adadelta
+        optm = Adadelta(lr=args.lr, rho=0.95, epsilon=1e-8)
     else:
         from keras.optimizers import SGD
         optm = SGD(lr=args.lr, decay=5e-4, momentum=0.9) #, nesterov=True)

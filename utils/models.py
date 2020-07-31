@@ -11,6 +11,8 @@ def get_model(model_name, input_shape, nb_class):
         model = cnn_vgg(input_shape, nb_class)
     elif model_name == "lstm1":
         model = lstm1(input_shape, nb_class)
+    elif model_name == "lstm":
+        model = lstm1v0(input_shape, nb_class)
     elif model_name == "lstm2":
         model = lstm2(input_shape, nb_class)
     elif model_name == "blstm1":
@@ -21,8 +23,36 @@ def get_model(model_name, input_shape, nb_class):
         model = lstm_fcn(input_shape, nb_class)
     elif model_name == "resnet":
         model = cnn_resnet(input_shape, nb_class)
-    else:
+    elif model_name == "mlp":
+        model = mlp4(input_shape, nb_class)
+    elif model_name == "lenet":
         model = cnn_lenet(input_shape, nb_class)
+    else:
+        print("model name missing")
+    return model
+
+
+def mlp4(input_shape, nb_class):
+    # Z. Wang, W. Yan, T. Oates, "Time Series Classification from Scratch with Deep Neural Networks: A Strong Baseline," Int. Joint Conf. Neural Networks, 2017, pp. 1578-1585
+    
+    ip = Input(shape=input_shape)
+    fc = Flatten()(ip)
+    
+    fc = Dropout(0.1)(fc)
+            
+    fc = Dense(500, activation='relu')(fc)
+    fc = Dropout(0.2)(fc)
+    
+    fc = Dense(500, activation='relu')(fc)
+    fc = Dropout(0.2)(fc)
+    
+    fc = Dense(500, activation='relu')(fc)
+    fc = Dropout(0.3)(fc)
+    
+    out = Dense(nb_class, activation='softmax')(fc)
+    
+    model = Model([ip], [out])
+    model.summary()
     return model
 
 def cnn_lenet(input_shape, nb_class):
@@ -84,6 +114,21 @@ def cnn_vgg(input_shape, nb_class):
     
     model = Model([ip], [out])
     model.summary()
+    return model
+
+def lstm1v0(input_shape, nb_class):
+    # Original proposal:
+    # S. Hochreiter and J. Schmidhuber, “Long Short-Term Memory,” Neural Computation, vol. 9, no. 8, pp. 1735–1780, Nov. 1997.
+        
+    ip = Input(shape=input_shape)
+
+    l2 = LSTM(512)(ip)
+    out = Dense(nb_class, activation='softmax')(l2)
+
+    model = Model([ip], [out])
+
+    model.summary()
+
     return model
 
 def lstm1(input_shape, nb_class):

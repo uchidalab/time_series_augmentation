@@ -16,17 +16,6 @@ def rotation(x):
     np.random.shuffle(rotate_axis)    
     return flip[:,np.newaxis,:] * x[:,:,rotate_axis]
 
-def rotation2d(x, sigma=0.2):
-    thetas = np.random.normal(loc=0, scale=sigma, size=(x.shape[0]))
-    c = np.cos(thetas)
-    s = np.sin(thetas)
-    
-    ret = np.zeros_like(x)
-    for i, pat in enumerate(x):
-        rot = np.array(((c[i], -s[i]), (s[i], c[i])))
-        ret[i] = np.dot(pat, rot)
-    return ret
-
 def permutation(x, max_segments=5, seg_mode="equal"):
     orig_steps = np.arange(x.shape[1])
     
@@ -200,7 +189,7 @@ def wdba(x, labels, batch_size=6, slope_constraint="symmetric", use_window=True)
 
 # Proposed
 
-def random_guided_warp(x, labels, slope_constraint="symmetric", use_window=True, dtw_type="normal"):
+def dtw_warp(x, labels, slope_constraint="symmetric", use_window=True, dtw_type="normal"):
     import utils.dtw as dtw
     
     if use_window:
@@ -234,7 +223,10 @@ def random_guided_warp(x, labels, slope_constraint="symmetric", use_window=True,
             ret[i,:] = pat
     return ret
 
-def discriminative_guided_warp(x, labels, batch_size=6, slope_constraint="symmetric", use_window=True, dtw_type="normal", use_variable_slice=True):
+def shape_dtw_warp(x, labels, slope_constraint="symmetric", use_window=True):
+    return dtw_warp(x, labels, slope_constraint, use_window, dtw_type="shape")
+
+def discriminative_dtw_warp(x, labels, batch_size=6, slope_constraint="symmetric", use_window=True, dtw_type="normal", use_variable_slice=True):
     import utils.dtw as dtw
     
     if use_window:
@@ -299,9 +291,12 @@ def discriminative_guided_warp(x, labels, batch_size=6, slope_constraint="symmet
         max_warp = np.max(warp_amount)
         if max_warp == 0:
             # unchanged
-            ret = window_slice(ret, reduce_ratio=0.95)
+            ret = window_slice(ret, reduce_ratio=0.9)
         else:
             for i, pat in enumerate(ret):
                 # Variable Sllicing
-                ret[i] = window_slice(pat[np.newaxis,:,:], reduce_ratio=0.95+0.05*warp_amount[i]/max_warp)[0]
+                ret[i] = window_slice(pat[np.newaxis,:,:], reduce_ratio=0.9+0.1*warp_amount[i]/max_warp)[0]
     return ret
+
+def discriminative_shape_dtw_warp(x, labels, batch_size=6, slope_constraint="symmetric", use_window=True):
+    return discriminative_dtw_warp(x, labels, batch_size, slope_constraint, use_window, dtw_type="shape")
