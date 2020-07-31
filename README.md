@@ -1,11 +1,13 @@
 # Time Series Augmentation
 
-This is a Keras implementation of the paper, Brian Kenji Iwana and Seiichi Uchida, *Time Series Data Augmentation for Neural Networks by Time Warping with a Discriminative Teacher*, arXiv preprint arXiv:2004.08780, 2020. [LINK](https://arxiv.org/abs/2004.08780)
+This is a collection of time series data augmentation methods and an example use using Keras.
 
 ## News
 
 - 2020/04/16: Repository Created.
-- 2020/06/22: Paper Accepted to ICPR 2020.
+- 2020/06/22: Accepted to ICPR 2020 - B. K. Iwana and S. Uchida, *Time Series Data Augmentation for Neural Networks by Time Warping with a Discriminative Teacher*, ICPR 2020 [LINK](https://arxiv.org/abs/2004.08780)
+- 2020/07/31: Survey Paper Posted on arXiv - B. K. Iwana and S. Uchida *An Empirical Survey of Data Augmentation for Time Series Classification
+  with Neural Networks*, arXiv
 
 ## Requires
 
@@ -55,10 +57,11 @@ python3 main.py --gpus=0 --dataset=FiftyWords --preset_files --ucr2018 --normali
 B. K. Iwana and S. Uchida, "Time Series Data Augmentation for Neural Networks by Time Warping with a Discriminative Teacher," International Conference on Pattern Recognition, 2020.
 
 ```
-@inproceedings{iwana2020time,
-  title={Time Series Data Augmentation for Neural Networks by Time Warping with a Discriminative Teacher},
+@article{iwana2020empirical,
+  title={An Empirical Survey of Data Augmentation for Time Series Classification
+  with Neural Networks},
   author={Iwana, Brian Kenji and Uchida, Seiichi},
-  booktitle={International Conference on Pattern Recognition},
+  journal={arXiv preprint arXiv:TBD},
   year={2020}
 }
 ```
