@@ -7,7 +7,7 @@ This is a collection of time series data augmentation methods and an example use
 - 2020/04/16: Repository Created.
 - 2020/06/22: Accepted to ICPR 2020 - B. K. Iwana and S. Uchida, *Time Series Data Augmentation for Neural Networks by Time Warping with a Discriminative Teacher*, ICPR 2020 [LINK](https://arxiv.org/abs/2004.08780)
 - 2020/07/31: Survey Paper Posted on arXiv - B. K. Iwana and S. Uchida *An Empirical Survey of Data Augmentation for Time Series Classification
-  with Neural Networks*, arXiv
+  with Neural Networks*, arXiv [LINK](https://arxiv.org/abs/2007.15951)
 
 ## Requires
 
@@ -61,7 +61,7 @@ B. K. Iwana and S. Uchida, "Time Series Data Augmentation for Neural Networks by
   title={An Empirical Survey of Data Augmentation for Time Series Classification
   with Neural Networks},
   author={Iwana, Brian Kenji and Uchida, Seiichi},
-  journal={arXiv preprint arXiv:TBD},
+  journal={arXiv preprint arXiv:2007.15951},
   year={2020}
 }
 ```
