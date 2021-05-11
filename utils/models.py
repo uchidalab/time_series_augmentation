@@ -1,8 +1,8 @@
-from keras.models import Model, Input
-from keras.layers import Dense, Flatten, Dropout
-from keras.layers import MaxPooling1D, Conv1D
-from keras.layers import LSTM, Bidirectional
-from keras.layers import BatchNormalization, GlobalAveragePooling1D, Permute, concatenate, Activation, add
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Dense, Flatten, Dropout, Input
+from tensorflow.keras.layers import MaxPooling1D, Conv1D
+from tensorflow.keras.layers import LSTM, Bidirectional
+from tensorflow.keras.layers import BatchNormalization, GlobalAveragePooling1D, Permute, concatenate, Activation, add
 import numpy as np
 import math
 

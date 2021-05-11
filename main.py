@@ -5,12 +5,12 @@ import math
 from tqdm import tqdm
 import argparse
 
-from keras.models import Model
-from keras.utils import to_categorical
-from keras.callbacks import ModelCheckpoint, ReduceLROnPlateau, TensorBoard, CSVLogger, EarlyStopping
+from tensorflow.keras.models import Model
+from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.callbacks import ModelCheckpoint, ReduceLROnPlateau, TensorBoard, CSVLogger, EarlyStopping
 
 import tensorflow as tf
-from keras.backend.tensorflow_backend import set_session
+from tensorflow.compat.v1.keras.backend import set_session
 
 import utils.models as mod
 from utils.input_data import get_datasets, run_augmentation
@@ -75,9 +75,9 @@ if __name__ == "__main__":
     if args.gpus:
         os.environ["CUDA_VISIBLE_DEVICES"] = args.gpus
         
-    config = tf.ConfigProto()
+    config = tf.compat.v1.ConfigProto()
     config.gpu_options.allow_growth = True 
-    sess = tf.Session(config=config)
+    sess = tf.compat.v1.Session(config=config)
     set_session(sess)  
     
     nb_class = ds.nb_classes(args.dataset)
@@ -125,16 +125,16 @@ if __name__ == "__main__":
         callback_list = [reduce_lr]
     
     if args.optimizer=="adam":
-        from keras.optimizers import Adam
+        from tensorflow.keras.optimizers import Adam
         optm = Adam(lr=args.lr)
     elif args.optimizer=="nadam":
-        from keras.optimizers import Nadam
+        from tensorflow.keras.optimizers import Nadam
         optm = Nadam(lr=args.lr)
     elif args.optimizer=="adadelta":
-        from keras.optimizers import Adadelta
+        from tensorflow.keras.optimizers import Adadelta
         optm = Adadelta(lr=args.lr, rho=0.95, epsilon=1e-8)
     else:
-        from keras.optimizers import SGD
+        from tensorflow.keras.optimizers import SGD
         optm = SGD(lr=args.lr, decay=5e-4, momentum=0.9) #, nesterov=True)
     model.compile(optimizer=optm, loss='categorical_crossentropy', metrics=['accuracy'])
     

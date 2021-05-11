@@ -189,7 +189,7 @@ def wdba(x, labels, batch_size=6, slope_constraint="symmetric", use_window=True)
 
 # Proposed
 
-def dtw_warp(x, labels, slope_constraint="symmetric", use_window=True, dtw_type="normal"):
+def random_guided_warp(x, labels, slope_constraint="symmetric", use_window=True, dtw_type="normal"):
     import utils.dtw as dtw
     
     if use_window:
@@ -223,10 +223,10 @@ def dtw_warp(x, labels, slope_constraint="symmetric", use_window=True, dtw_type=
             ret[i,:] = pat
     return ret
 
-def shape_dtw_warp(x, labels, slope_constraint="symmetric", use_window=True):
-    return dtw_warp(x, labels, slope_constraint, use_window, dtw_type="shape")
+def random_guided_warp_shape(x, labels, slope_constraint="symmetric", use_window=True):
+    return random_guided_warp(x, labels, slope_constraint, use_window, dtw_type="shape")
 
-def discriminative_dtw_warp(x, labels, batch_size=6, slope_constraint="symmetric", use_window=True, dtw_type="normal", use_variable_slice=True):
+def discriminative_guided_warp(x, labels, batch_size=6, slope_constraint="symmetric", use_window=True, dtw_type="normal", use_variable_slice=True):
     import utils.dtw as dtw
     
     if use_window:
@@ -298,5 +298,5 @@ def discriminative_dtw_warp(x, labels, batch_size=6, slope_constraint="symmetric
                 ret[i] = window_slice(pat[np.newaxis,:,:], reduce_ratio=0.9+0.1*warp_amount[i]/max_warp)[0]
     return ret
 
-def discriminative_shape_dtw_warp(x, labels, batch_size=6, slope_constraint="symmetric", use_window=True):
-    return discriminative_dtw_warp(x, labels, batch_size, slope_constraint, use_window, dtw_type="shape")
+def discriminative_guided_warp_shape(x, labels, batch_size=6, slope_constraint="symmetric", use_window=True):
+    return discriminative_guided_warp(x, labels, batch_size, slope_constraint, use_window, dtw_type="shape")

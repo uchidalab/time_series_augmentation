@@ -4,7 +4,7 @@ import sys
 from tqdm import tqdm
 import argparse
 import time
-from keras.utils import to_categorical
+from tensorflow.keras.utils import to_categorical
 
 
 from utils.input_data import get_datasets, run_augmentation

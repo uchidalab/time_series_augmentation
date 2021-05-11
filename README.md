@@ -12,12 +12,12 @@ This is a collection of time series data augmentation methods and an example use
 
 ## Requires
 
-This code was developed in Python 3.5.2. and requires Tensorflow 1.10.0 and Keras 2.2.4
+This code was developed in Python 3.6.9. and requires Tensorflow 2.4.1 and Keras 2.2.4
 
 ### Normal Install
 
 ```
-pip install keras==2.2.4 numpy==1.14.5 matplotlib==2.2.2 scikit-image==0.15.0 tqdm
+pip install tensorflow==2.4.1 keras==2.2.4 numpy==1.19.5 matplotlib==2.2.2 scikit-image==0.15.0 tqdm
 ```
 
 ### Docker
@@ -50,12 +50,12 @@ Example:
 To **train** a 1D **VGG** on the **FiftyWords** dataset from the **UCR Time Series Archive 2018** with **4x** the training dataset in **Jittering**, use:
 
 ```
-python3 main.py --gpus=0 --dataset=FiftyWords --preset_files --ucr2018 --normalize_input --train --save --jitter --augmentation_ratio=4 --model=vgg
+python3 main.py --gpus=0 --dataset=CBF --preset_files --ucr2018 --normalize_input --train --save --jitter --augmentation_ratio=4 --model=vgg
 ```
 
 ## Citation
 
-B. K. Iwana and S. Uchida, "Time Series Data Augmentation for Neural Networks by Time Warping with a Discriminative Teacher," International Conference on Pattern Recognition, 2020.
+B. K. Iwana and S. Uchida, "An Empirical Survey of Data Augmentation for Time Series Classification with Neural Networks," arXiv, 2020.
 
 ```
 @article{iwana2020empirical,

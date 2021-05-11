@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:1.10.0-gpu-py3 
+FROM tensorflow/tensorflow:2.4.1-gpu-jupyter 
 LABEL maintainer="Brian Kenji Iwana"
 
 RUN apt-get update \
@@ -8,3 +8,4 @@ RUN apt-get update \
 
 RUN pip install tqdm
 RUN pip install keras==2.2.4
+RUN pip install scikit-image==0.15.0
