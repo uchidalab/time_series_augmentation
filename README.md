@@ -17,7 +17,7 @@ This code was developed in Python 3.6.9. and requires Tensorflow 2.4.1 and Keras
 ### Normal Install
 
 ```
-pip install tensorflow==2.4.1 keras==2.2.4 numpy==1.19.5 matplotlib==2.2.2 scikit-image==0.15.0 tqdm
+pip install tensorflow-gpu==2.4.1 keras==2.2.4 numpy==1.19.5 matplotlib==2.2.2 scikit-image==0.15.0 tqdm
 ```
 
 ### Docker
