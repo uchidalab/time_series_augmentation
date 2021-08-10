@@ -6,9 +6,9 @@ This is a collection of time series data augmentation methods and an example use
 
 - 2020/04/16: Repository Created.
 - 2020/06/22: Accepted to ICPR 2020 - B. K. Iwana and S. Uchida, *Time Series Data Augmentation for Neural Networks by Time Warping with a Discriminative Teacher*, ICPR 2020 [LINK](https://arxiv.org/abs/2004.08780)
-- 2020/07/31: Survey Paper Posted on arXiv - B. K. Iwana and S. Uchida *An Empirical Survey of Data Augmentation for Time Series Classification
-  with Neural Networks*, arXiv [LINK](https://arxiv.org/abs/2007.15951)
+- 2020/07/31: Survey Paper Posted on arXiv - B. K. Iwana and S. Uchida *An Empirical Survey of Data Augmentation for Time Series Classification with Neural Networks*, arXiv [LINK](https://arxiv.org/abs/2007.15951)
 - 2021/05/11: Tensorflow v1 branched. The master will now support Tensorflow v2.
+- 2021/07/15: Survey Paper Published on PLOS ONE - B. K. Iwana and S. Uchida *An Empirical Survey of Data Augmentation for Time Series Classification with Neural Networks*, PLOS ONE 16(7): e0254841, [LINK](https://doi.org/10.1371/journal.pone.0254841)
 
 ## Requires
 
