@@ -99,6 +99,8 @@ def window_warp(x, window_ratio=0.1, scales=[0.5, 2.]):
 
 def spawner(x, labels, sigma=0.05, verbose=0):
     # https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6983028/
+    # use verbose=-1 to turn off warnings
+    # use verbose=1 to print out figures
     
     import utils.dtw as dtw
     random_points = np.random.randint(low=1, high=x.shape[1]-1, size=x.shape[0])
@@ -127,12 +129,15 @@ def spawner(x, labels, sigma=0.05, verbose=0):
             for dim in range(x.shape[2]):
                 ret[i,:,dim] = np.interp(orig_steps, np.linspace(0, x.shape[1]-1., num=mean.shape[0]), mean[:,dim]).T
         else:
-            print("There is only one pattern of class %d, skipping pattern average"%l[i])
+            if verbose > -1:
+                print("There is only one pattern of class %d, skipping pattern average"%l[i])
             ret[i,:] = pat
     return jitter(ret, sigma=sigma)
 
-def wdba(x, labels, batch_size=6, slope_constraint="symmetric", use_window=True):
+def wdba(x, labels, batch_size=6, slope_constraint="symmetric", use_window=True, verbose=0):
     # https://ieeexplore.ieee.org/document/8215569
+    # use verbose = -1 to turn off warnings    
+    # slope_constraint is for DTW. "symmetric" or "asymmetric"
     
     import utils.dtw as dtw
     
@@ -183,13 +188,18 @@ def wdba(x, labels, batch_size=6, slope_constraint="symmetric", use_window=True)
             
             ret[i,:] = average_pattern / weighted_sums[:,np.newaxis]
         else:
-            print("There is only one pattern of class %d, skipping pattern average"%l[i])
+            if verbose > -1:
+                print("There is only one pattern of class %d, skipping pattern average"%l[i])
             ret[i,:] = x[i]
     return ret
 
 # Proposed
 
-def random_guided_warp(x, labels, slope_constraint="symmetric", use_window=True, dtw_type="normal"):
+def random_guided_warp(x, labels, slope_constraint="symmetric", use_window=True, dtw_type="normal", verbose=0):
+    # use verbose = -1 to turn off warnings
+    # slope_constraint is for DTW. "symmetric" or "asymmetric"
+    # dtw_type is for shapeDTW or DTW. "normal" or "shape"
+    
     import utils.dtw as dtw
     
     if use_window:
@@ -219,14 +229,19 @@ def random_guided_warp(x, labels, slope_constraint="symmetric", use_window=True,
             for dim in range(x.shape[2]):
                 ret[i,:,dim] = np.interp(orig_steps, np.linspace(0, x.shape[1]-1., num=warped.shape[0]), warped[:,dim]).T
         else:
-            print("There is only one pattern of class %d, skipping timewarping"%l[i])
+            if verbose > -1:
+                print("There is only one pattern of class %d, skipping timewarping"%l[i])
             ret[i,:] = pat
     return ret
 
 def random_guided_warp_shape(x, labels, slope_constraint="symmetric", use_window=True):
     return random_guided_warp(x, labels, slope_constraint, use_window, dtw_type="shape")
 
-def discriminative_guided_warp(x, labels, batch_size=6, slope_constraint="symmetric", use_window=True, dtw_type="normal", use_variable_slice=True):
+def discriminative_guided_warp(x, labels, batch_size=6, slope_constraint="symmetric", use_window=True, dtw_type="normal", use_variable_slice=True, verbose=0):
+    # use verbose = -1 to turn off warnings
+    # slope_constraint is for DTW. "symmetric" or "asymmetric"
+    # dtw_type is for shapeDTW or DTW. "normal" or "shape"
+    
     import utils.dtw as dtw
     
     if use_window:
@@ -284,7 +299,8 @@ def discriminative_guided_warp(x, labels, batch_size=6, slope_constraint="symmet
             for dim in range(x.shape[2]):
                 ret[i,:,dim] = np.interp(orig_steps, np.linspace(0, x.shape[1]-1., num=warped.shape[0]), warped[:,dim]).T
         else:
-            print("There is only one pattern of class %d"%l[i])
+            if verbose > -1:
+                print("There is only one pattern of class %d"%l[i])
             ret[i,:] = pat
             warp_amount[i] = 0.
     if use_variable_slice:
