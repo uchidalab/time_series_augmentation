@@ -37,8 +37,6 @@ def get_datasets(args):
             train_data_file = os.path.join(args.data_dir, args.dataset, "%s_TRAIN.tsv"%args.dataset)
             test_data_file = os.path.join(args.data_dir, args.dataset, "%s_TEST.tsv"%args.dataset)
             x_train, y_train, x_test, y_test = read_data_sets(train_data_file, "", test_data_file, "", delimiter="\t")
-            x_train = np.nan_to_num(x_train)
-            x_test = np.nan_to_num(x_test)
         else:
             x_train_file = os.path.join(args.data_dir, "train-%s-data.txt"%(args.dataset))
             y_train_file = os.path.join(args.data_dir, "train-%s-labels.txt"%(args.dataset))
@@ -50,11 +48,14 @@ def get_datasets(args):
     
     # Normalize
     if args.normalize_input:
-        x_train_max = np.max(x_train)
-        x_train_min = np.min(x_train)
+        x_train_max = np.nanmax(x_train)
+        x_train_min = np.nanmin(x_train)
         x_train = 2. * (x_train - x_train_min) / (x_train_max - x_train_min) - 1.
         # Test is secret
         x_test = 2. * (x_test - x_train_min) / (x_train_max - x_train_min) - 1.
+        
+    x_train = np.nan_to_num(x_train)
+    x_test = np.nan_to_num(x_test)
     return x_train, y_train, x_test, y_test
 
 def run_augmentation(x, y, args):
