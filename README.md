@@ -58,11 +58,17 @@ python3 main.py --gpus=0 --dataset=CBF --preset_files --ucr2018 --normalize_inpu
 B. K. Iwana and S. Uchida, "An Empirical Survey of Data Augmentation for Time Series Classification with Neural Networks," arXiv, 2020.
 
 ```
-@article{iwana2020empirical,
-  title={An Empirical Survey of Data Augmentation for Time Series Classification
-  with Neural Networks},
-  author={Iwana, Brian Kenji and Uchida, Seiichi},
-  journal={arXiv preprint arXiv:2007.15951},
-  year={2020}
+@article{Iwana_2021,
+	doi = {10.1371/journal.pone.0254841},
+	url = {https://doi.org/10.1371%2Fjournal.pone.0254841},
+	year = 2021,
+	month = {jul},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {16},
+	number = {7},
+	pages = {e0254841},
+	author = {Brian Kenji Iwana and Seiichi Uchida},
+	title = {An empirical survey of data augmentation for time series classification with neural networks},
+	journal = {{PLOS} {ONE}}
 }
 ```
